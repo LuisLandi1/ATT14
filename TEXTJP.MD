@@ -39,44 +39,7 @@
       +------------------+
 
 
-## Relacionamentos
 
-1. **Hospede - Reserva**
-   - **Relacionamento:** Um hóspede pode fazer várias reservas.
-   - **Cardinalidade:** 1:N (1 hóspede pode ter várias reservas)
-   - **Chave Estrangeira:** `cpf` (em **Reserva**).
-
-2. **Reserva - Quarto**
-   - **Relacionamento:** Cada reserva é associada a um único quarto.
-   - **Cardinalidade:** N:1 (várias reservas podem ser feitas para o mesmo quarto)
-   - **Chave Estrangeira:** `numero` (em **Reserva**).
-
-3. **Reserva - Pagamento**
-   - **Relacionamento:** Cada reserva pode ter vários pagamentos.
-   - **Cardinalidade:** 1:N (uma reserva pode ter vários pagamentos)
-   - **Chave Estrangeira:** `idReserva` (em **Pagamento**).
-
-4. **Reserva - CheckinCheckout**
-   - **Relacionamento:** Cada reserva tem um processo único de check-in e check-out.
-   - **Cardinalidade:** 1:1 (uma reserva tem um único processo de check-in/check-out)
-   - **Chave Estrangeira:** `idReserva` (em **CheckinCheckout**).
-
-5. **Funcionario - LimpezaManutencao**
-   - **Relacionamento:** Um funcionário pode executar várias tarefas de limpeza ou manutenção.
-   - **Cardinalidade:** 1:N (um funcionário pode executar várias tarefas)
-   - **Chave Estrangeira:** `cpfFuncionario` (em **LimpezaManutencao**).
-
-6. **Quarto - LimpezaManutencao**
-   - **Relacionamento:** Cada quarto pode ter várias tarefas de limpeza ou manutenção associadas.
-   - **Cardinalidade:** 1:N (um quarto pode ter várias tarefas associadas a ele)
-   - **Chave Estrangeira:** `numeroQuarto` (em **LimpezaManutencao**).
-
-7. **PrecoDinamico - TaxasTarifas**
-   - **Relacionamento:** O preço dinâmico é ajustado conforme as taxas e tarifas.
-   - **Cardinalidade:** 1:N (um preço dinâmico pode ser afetado por várias promoções/taxas)
-   - **Chave Estrangeira:** `desconto` (em **PrecoDinamico**).
-
----
 
 # Dicionário de Dados
 
