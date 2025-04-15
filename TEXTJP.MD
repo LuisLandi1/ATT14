@@ -1,69 +1,76 @@
-## Diagrama ER - Sistema de Hotel
+classDiagram
+direction TB
 
-### Hospede
-| Atributos        |
-|------------------|
-| +nome            |
-| +cpf             |
-| +telefone        |
-| +email           |
+    class Hospede {
+        +String nome
+        +String cpf
+        +String telefone
+        +String email
+        +historicoReservas()
+    }
 
-### Reserva
-| Atributos        |
-|------------------|
-| +idReserva       |
-| +dataCheckin     |
-| +dataCheckout    |
-| +status          |
+    class Reserva {
+        +int idReserva
+        +Date dataCheckin
+        +Date dataCheckout
+        +String status
+        +registrarReserva()
+        +cancelarReserva()
+    }
 
-### Quarto
-| Atributos        |
-|------------------|
-| +numero          |
-| +tipo            |
-| +disponivel      |
-| +preco           |
+    class Quarto {
+        +int numero
+        +String tipo
+        +boolean disponivel
+        +int preco
+        +atualizarStatus()
+    }
 
+    class Pagamento {
+        +int idPagamento
+        +float valor
+        +String metodo
+        +registrarPagamento()
+    }
 
+    class CheckinCheckout {
+        +int idCheckin
+        +Date dataCheckin
+        +Date dataCheckout
+        +realizarCheckin()
+        +realizarCheckout()
+    }
 
-### Pagamento
-| Atributos        |
-|------------------|
-| +idPagamento     |
-| +valor           |
-| +metodo          |
+    class TaxasTarifas {
+        +float desconto
+        +String tipoPromocao
+        +aplicarPromocao()
+    }
 
-### CheckinCheckout
-| Atributos        |
-|------------------|
-| +idCheckin       |
-| +dataCheckin     |
-| +dataCheckout    |
+    class Funcionario {
+        +String nome
+        +String cargo
+        +String cpf
+        +String telefone
+        +atribuirTarefa()
+    }
 
+    class LimpezaManutencao {
+        +int id
+        +String tipoServico
+        +solicitarLimpeza()
+        +solicitarManutencao()
+    }
 
-### TaxasTarifas
-| Atributos        |
-|------------------|
-| +desconto        |
-| +tipoPromocao    |
-
-### Funcionario
-| Atributos        |
-|------------------|
-| +nome            |
-| +cargo           |
-| +cpf             |
-| +telefone        |
-
-### LimpezaManutencao
-| Atributos        |
-|------------------|
-| +id              |
-| +tipoServico     |
-
-
-
-
+    Hospede "1" -- "n" Reserva : realiza
+    Reserva "1" -- "1" Quarto : associa
+    Reserva "1" -- "1" CheckinCheckout : gerencia
+    Pagamento "1" -- "n" CheckinCheckout : registra
+    Funcionario "1" -- "n" LimpezaManutencao : executa
+    LimpezaManutencao "1" -- "n" Quarto : monitora
+    TaxasTarifas "1" -- "n" Quarto : aplica
+    TaxasTarifas "1" -- "n" Reserva : aplica
+    TaxasTarifas "1" -- "n" Pagamento : aplica
 
 
 
