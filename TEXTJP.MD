@@ -1,42 +1,86 @@
-+------------------+       +-----------------+       +-------------------+
-|     Hospede      | 1 --- |     Reserva     | N --- |     Quarto        |
-|------------------|       |-----------------|       |-------------------|
-| +nome            |       | +idReserva      |       | +numero           |
-| +cpf             |       | +dataCheckin    |       | +tipo             |
-| +telefone        |       | +dataCheckout   |       | +disponivel       |
-| +email           |       | +status         |       | +preco            |
-+------------------+       +-----------------+       +-------------------+
-            |                           |
-            |                           |
-            |                           |
-            |                           |
-            |                           |
-            V                           V
-      +------------------+       +------------------+
-      |  Pagamento       | N --- | CheckinCheckout  |
-      |------------------|       |------------------|
-      | +idPagamento     |       | +idCheckin       |
-      | +valor           |       | +dataCheckin     |
-      | +metodo          |       | +dataCheckout    |
-      +------------------+       +------------------+
-            |
-            |
-            V
-      +------------------+
-      |  TaxasTarifas    |
-      |------------------|
-      | +desconto        |
-      | +tipoPromocao    |
-      +------------------+
+## Diagrama ER - Sistema de Hotel
 
-      +------------------+       +-------------------+
-      | Funcionario      | 1 --- | LimpezaManutencao |
-      |------------------|       |-------------------|
-      | +nome            |       | +id               |
-      | +cargo           |       | +tipoServico      |
-      | +cpf             |       |                   |
-      | +telefone        |       +-------------------+
-      +------------------+
+### Hospede
+| Atributos        |
+|------------------|
+| +nome            |
+| +cpf             |
+| +telefone        |
+| +email           |
+
+### Reserva
+| Atributos        |
+|------------------|
+| +idReserva       |
+| +dataCheckin     |
+| +dataCheckout    |
+| +status          |
+
+### Quarto
+| Atributos        |
+|------------------|
+| +numero          |
+| +tipo            |
+| +disponivel      |
+| +preco           |
+
+### Relacionamento entre as Entidades:
+
+- **Hospede 1 --- N Reserva**  
+  Um hóspede pode ter várias reservas, mas cada reserva pertence a um único hóspede.
+
+- **Reserva N --- 1 Quarto**  
+  Uma reserva é associada a um único quarto, mas um quarto pode ter várias reservas ao longo do tempo.
+
+### Pagamento
+| Atributos        |
+|------------------|
+| +idPagamento     |
+| +valor           |
+| +metodo          |
+
+### CheckinCheckout
+| Atributos        |
+|------------------|
+| +idCheckin       |
+| +dataCheckin     |
+| +dataCheckout    |
+
+### Relacionamento entre as Entidades:
+
+- **Pagamento N --- 1 CheckinCheckout**  
+  Um pagamento pode estar relacionado a um único check-in/check-out.
+
+- **CheckinCheckout 1 --- N Reserva**  
+  Cada check-in/check-out pode estar relacionado a várias reservas.
+
+### TaxasTarifas
+| Atributos        |
+|------------------|
+| +desconto        |
+| +tipoPromocao    |
+
+### Funcionario
+| Atributos        |
+|------------------|
+| +nome            |
+| +cargo           |
+| +cpf             |
+| +telefone        |
+
+### LimpezaManutencao
+| Atributos        |
+|------------------|
+| +id              |
+| +tipoServico     |
+
+### Relacionamento entre as Entidades:
+
+- **Funcionario 1 --- N LimpezaManutencao**  
+  Cada funcionário pode ser responsável por várias tarefas de limpeza/manutenção.
+
+---
+
 
 
 
