@@ -1,82 +1,43 @@
-# Modelo Entidade-Relacionamento (MER)
++------------------+       +-----------------+       +-------------------+
+|     Hospede      | 1 --- |     Reserva     | N --- |     Quarto        |
+|------------------|       |-----------------|       |-------------------|
+| +nome            |       | +idReserva      |       | +numero           |
+| +cpf             |       | +dataCheckin    |       | +tipo             |
+| +telefone        |       | +dataCheckout   |       | +disponivel       |
+| +email           |       | +status         |       | +preco            |
++------------------+       +-----------------+       +-------------------+
+            |                           |
+            |                           |
+            |                           |
+            |                           |
+            |                           |
+            V                           V
+      +------------------+       +------------------+
+      |  Pagamento       | N --- | CheckinCheckout  |
+      |------------------|       |------------------|
+      | +idPagamento     |       | +idCheckin       |
+      | +valor           |       | +dataCheckin     |
+      | +metodo          |       | +dataCheckout    |
+      +------------------+       +------------------+
+            |
+            |
+            V
+      +------------------+
+      |  TaxasTarifas    |
+      |------------------|
+      | +desconto        |
+      | +tipoPromocao    |
+      +------------------+
 
-## Entidades e Atributos
+      +------------------+       +-------------------+
+      | Funcionario      | 1 --- | LimpezaManutencao |
+      |------------------|       |-------------------|
+      | +nome            |       | +id               |
+      | +cargo           |       | +tipoServico      |
+      | +cpf             |       |                   |
+      | +telefone        |       +-------------------+
+      +------------------+
 
-### 1. **Hospede**
-- **Atributos:**
-  - `nome`: String — Nome do hóspede.
-  - `cpf`: String — CPF do hóspede (único).
-  - `telefone`: Int — Número de telefone do hóspede.
-  - `email`: String — E-mail do hóspede.
-- **Chave Primária:** `cpf` (único).
-
-### 2. **Reserva**
-- **Atributos:**
-  - `idReserva`: Int — Identificador único da reserva.
-  - `dataCheckin`: Date — Data de entrada (check-in) do hóspede.
-  - `dataCheckout`: Date — Data de saída (check-out) do hóspede.
-  - `status`: String — Status da reserva (confirmada/cancelada).
-  - `cpf`: String — CPF do hóspede (chave estrangeira para **Hospede**).
-- **Chave Primária:** `idReserva`.
-- **Chave Estrangeira:** `cpf` (referencia **Hospede**).
-
-### 3. **Quarto**
-- **Atributos:**
-  - `numero`: Int — Número do quarto.
-  - `tipo`: String — Tipo de quarto (ex: luxo, standard).
-  - `disponivel`: Boolean — Status de disponibilidade do quarto.
-  - `preco`: Float — Preço do quarto.
-- **Chave Primária:** `numero`.
-
-### 4. **Funcionario**
-- **Atributos:**
-  - `nome`: String — Nome do funcionário.
-  - `cargo`: String — Cargo do funcionário.
-  - `cpf`: String — CPF do funcionário (único).
-  - `telefone`: String — Telefone do funcionário.
-- **Chave Primária:** `cpf`.
-
-### 5. **Pagamento**
-- **Atributos:**
-  - `idPagamento`: Int — Identificador único do pagamento.
-  - `valor`: Float — Valor do pagamento.
-  - `metodo`: String — Método de pagamento (cartão, boleto, etc.).
-  - `dataPagamento`: Date — Data do pagamento.
-  - `idReserva`: Int — Identificador da reserva, chave estrangeira para **Reserva**.
-- **Chave Primária:** `idPagamento`.
-- **Chave Estrangeira:** `idReserva` (referencia **Reserva**).
-
-### 6. **PrecoDinamico**
-- **Atributos:**
-  - `precoBase`: Float — Preço base do quarto.
-  - `precoAjustado`: Float — Preço ajustado de acordo com a demanda ou sazonalidade.
-- **Chave Primária:** `precoBase`.
-
-### 7. **CheckinCheckout**
-- **Atributos:**
-  - `idCheckin`: Int — Identificador único do processo de check-in/check-out.
-  - `dataCheckin`: Date — Data de check-in do hóspede.
-  - `dataCheckout`: Date — Data de check-out do hóspede.
-  - `idReserva`: Int — Identificador da reserva, chave estrangeira para **Reserva**.
-- **Chave Primária:** `idCheckin`.
-- **Chave Estrangeira:** `idReserva` (referencia **Reserva**).
-
-### 8. **LimpezaManutencao**
-- **Atributos:**
-  - `id`: Int — Identificador único do serviço.
-  - `tipoServico`: String — Tipo do serviço (limpeza, manutenção, etc.).
-  - `numeroQuarto`: Int — Número do quarto, chave estrangeira para **Quarto**.
-  - `cpfFuncionario`: String — CPF do funcionário, chave estrangeira para **Funcionario**.
-- **Chave Primária:** `id`.
-- **Chaves Estrangeiras:**
-  - `numeroQuarto` (referencia **Quarto**).
-  - `cpfFuncionario` (referencia **Funcionario**).
-
-### 9. **TaxasTarifas**
-- **Atributos:**
-  - `desconto`: Float — Valor do desconto aplicado na tarifa.
-  - `tipoPromocao`: String — Tipo de promoção (ex: percentual, valor fixo, etc.).
-- **Chave Primária:** `desconto` (ou identificador único, se necessário).
 
 ## Relacionamentos
 
