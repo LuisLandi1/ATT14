@@ -24,13 +24,7 @@
 | +disponivel      |
 | +preco           |
 
-### Relacionamento entre as Entidades:
 
-- **Hospede 1 --- N Reserva**  
-  Um hóspede pode ter várias reservas, mas cada reserva pertence a um único hóspede.
-
-- **Reserva N --- 1 Quarto**  
-  Uma reserva é associada a um único quarto, mas um quarto pode ter várias reservas ao longo do tempo.
 
 ### Pagamento
 | Atributos        |
@@ -46,13 +40,6 @@
 | +dataCheckin     |
 | +dataCheckout    |
 
-### Relacionamento entre as Entidades:
-
-- **Pagamento N --- 1 CheckinCheckout**  
-  Um pagamento pode estar relacionado a um único check-in/check-out.
-
-- **CheckinCheckout 1 --- N Reserva**  
-  Cada check-in/check-out pode estar relacionado a várias reservas.
 
 ### TaxasTarifas
 | Atributos        |
@@ -74,12 +61,11 @@
 | +id              |
 | +tipoServico     |
 
-### Relacionamento entre as Entidades:
 
-- **Funcionario 1 --- N LimpezaManutencao**  
-  Cada funcionário pode ser responsável por várias tarefas de limpeza/manutenção.
 
----
+
+
+
 
 
 
