@@ -1,78 +1,89 @@
-mermaid
+```mermaid
 classDiagram
 direction TB
-
     class Hospede {
-        +String nome
-        +String cpf
-        +String telefone
-        +String email
-        +historicoReservas()
+	    +String nome
+	    +String email
+	    +int telefone
+	    +String documento
+	    +historicoReservas()
     }
 
     class Reserva {
-        +int idReserva
-        +Date dataCheckin
-        +Date dataCheckout
-        +String status
-        +registrarReserva()
-        +cancelarReserva()
+	    +int id
+	    +Date dataCheckIn
+	    +Date dataCheckOut
+	    +String tipoQuarto
+	    +boolean confirmada
+	    +registrarReserva()
+	    +cancelarReserva()
     }
 
     class Quarto {
-        +int numero
-        +String tipo
-        +boolean disponivel
-        +int preco
-        +atualizarStatus()
+	    +int numero
+	    +int preco
+	    +String tipo
+	    +boolean disponivel
+	    +atualizarStatus()
     }
 
-    class Pagamento {
-        +int idPagamento
-        +float valor
-        +String metodo
-        +registrarPagamento()
+    class PrecoDinamico {
+	    +float tarifaBase
+	    +float tarifaAtual
+	    +ajustarPreco()
     }
 
-    class CheckinCheckout {
-        +int idCheckin
-        +Date dataCheckin
-        +Date dataCheckout
-        +realizarCheckin()
-        +realizarCheckout()
+    class CheckInOut {
+	    +boolean checkInRealizado
+	    +boolean checkOutRealizado
+	    +realizarCheckIn()
+	    +realizarCheckOut()
     }
 
-    class TaxasTarifas {
-        +float desconto
-        +String tipoPromocao
-        +aplicarPromocao()
-    }
-
-    class Funcionario {
-        +String nome
-        +String cargo
-        +String cpf
-        +String telefone
-        +atribuirTarefa()
+    class GestaoQuartos {
+	    +atualizarDisponibilidade()
+	    +gerenciarItens()
     }
 
     class LimpezaManutencao {
-        +int id
-        +String tipoServico
-        +solicitarLimpeza()
-        +solicitarManutencao()
+	    +solicitarLimpeza()
+	    +solicitarManutencao()
+    }
+
+    class Financeiro {
+	    +registrarPagamento()
+	    +gerarRelatorio()
+    }
+
+    class Cliente {
+	    +String nome
+	    +String preferencias
+	    +atualizarPerfil()
+    }
+
+    class Funcionario {
+	    +String nome
+	    +String cargo
+	    +int horasTrabalhadas
+	    +atribuirTarefa()
+    }
+
+    class TaxasTarifas {
+	    +float desconto
+	    +aplicarPromocao()
     }
 
     Hospede "1" -- "n" Reserva : realiza
     Reserva "1" -- "1" Quarto : associa
-    Reserva "1" -- "1" CheckinCheckout : gerencia
-    Pagamento "1" -- "n" CheckinCheckout : registra
-    Funcionario "1" -- "n" LimpezaManutencao : executa
+    Reserva "1" -- "1" CheckInOut : gerencia
+    GestaoQuartos "1" -- "n" Quarto : controla
     LimpezaManutencao "1" -- "n" Quarto : monitora
-    TaxasTarifas "1" -- "n" Quarto : aplica
-    TaxasTarifas "1" -- "n" Reserva : aplica
-    TaxasTarifas "1" -- "n" Pagamento : aplica
+    Financeiro "1" -- "n" Reserva : processa
+    Cliente "1" -- "n" Reserva : consulta
+    Funcionario "1" -- "n" LimpezaManutencao : executa
+    TaxasTarifas "1" -- "n" PrecoDinamico : aplica
 
+```
 
 
 
